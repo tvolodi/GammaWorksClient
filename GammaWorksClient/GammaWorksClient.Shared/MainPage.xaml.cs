@@ -1,5 +1,7 @@
-﻿using System;
+﻿using GammaWorksClient.Shared.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,9 +24,27 @@ namespace GammaWorksClient
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private ObservableCollection<BaseTask> BaseTaskObsList { get; set; }
+
         public MainPage()
         {
             this.InitializeComponent();
+
+            BaseTaskObsList = new ObservableCollection<BaseTask>();
+            BaseTask testBaseTask = new BaseTask
+            {
+                Descr = "Test task 1"                
+            };
+            BaseTaskObsList.Add(testBaseTask);
+            testBaseTask = new BaseTask
+            {
+                Descr = "Test task 2"
+            };
+            BaseTaskObsList.Add(testBaseTask);
+
+            baseTaskListView.ItemsSource = BaseTaskObsList;
+
+            // DataContext = BaseTaskObsList;
         }
     }
 }
