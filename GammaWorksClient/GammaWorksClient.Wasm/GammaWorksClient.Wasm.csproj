@@ -39,10 +39,10 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.1" />
     <PackageReference Include="Realm" Version="4.3.0" />
-    <PackageReference Include="Uno.UI" Version="2.2.0" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="2.2.0" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.Wasm.Bootstrap" Version="1.2.0-dev.18" />
-    <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="1.2.0-dev.18" />
+    <PackageReference Include="Uno.UI" Version="2.4.0" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="2.4.0" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.Wasm.Bootstrap" Version="1.2.0" />
+    <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="1.2.0" />
   </ItemGroup>
   <Import Project="..\GammaWorksClient.Shared\GammaWorksClient.Shared.projitems" Label="Shared" Condition="Exists('..\GammaWorksClient.Shared\GammaWorksClient.Shared.projitems')" />
 </Project>

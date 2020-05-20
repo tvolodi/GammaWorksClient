@@ -1,0 +1,41 @@
+﻿<Page
+    x:Class="GammaWorksClient.Shared.Views.BaseTaskView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GammaWorksClient.Shared.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="20*" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+
+        <CommandBar x:Name="BaseTaskCommandBar" 
+                    Grid.Row="0" 
+                    AllowDrop="True">
+            <CommandBar.Content>
+                <TextBlock Text="CommandBar" />
+            </CommandBar.Content>
+        </CommandBar>
+
+        <StackPanel Orientation="Vertical" Grid.Row="1">
+            <TextBox x:Name="DescriptionTB" Header="Description" Text="" PlaceholderText="Short task description" Margin="10,5,10,10"/>
+            <TextBox x:Name="PlannedStartTB" Header="Planned start:" PlaceholderText="Start date and time" Margin="10,5,10,10"/>
+            <TextBox x:Name="PlannedFinishTB" Header="Planned finish:" PlaceholderText="Finish date and time" Margin="10,5,10,10"/>
+            <TextBox x:Name="ActualStartTB" Header="Actual start" PlaceholderText="Actual date and time" Margin="10,5,10,10"/>
+            <TextBox x:Name="ActualFinishTB" Header="Actual finish" PlaceholderText="Finish date and time" Margin="10,5,10,10"/>
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <TextBlock Text="Status: " />
+        </StackPanel>
+
+
+    </Grid>
+</Page>

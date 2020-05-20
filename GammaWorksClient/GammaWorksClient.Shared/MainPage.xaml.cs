@@ -1,4 +1,7 @@
 ﻿using GammaWorksClient.Shared.Model;
+using GammaWorksClient.Shared.UiTool;
+using GammaWorksClient.Shared.Views;
+using Realms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,7 +27,7 @@ namespace GammaWorksClient
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private ObservableCollection<BaseTask> BaseTaskObsList { get; set; }
+        private ObservableCollection<BaseTask> BaseTaskObsList { get; set; }       
 
         public MainPage()
         {
@@ -42,9 +45,57 @@ namespace GammaWorksClient
             };
             BaseTaskObsList.Add(testBaseTask);
 
-            baseTaskListView.ItemsSource = BaseTaskObsList;
+#if NETFX_CORE || __ANDROID__ || __IOS__ || __MACOS__
 
+            var realm = Realm.GetInstance();
+
+            realm.Write(() =>
+            {
+                realm.Add(testBaseTask);
+            });
+
+            var baseTasksCounter = realm.All<BaseTask>();
+
+            int counter = baseTasksCounter.Count();
+
+            realm.Write(() =>
+            {
+                realm.Add(new BaseTask { Descr = "Test task 3"});
+            });
+
+            int counter2 = baseTasksCounter.Count();
+
+
+            var taskList = baseTasksCounter.ToList();
+#endif
             // DataContext = BaseTaskObsList;
         }
+
+        private void AddNewBaseTask(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EditBaseTask(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteBaseTask(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MainNavView_LoadedHandler(object sender, RoutedEventArgs e)
+        {
+            // MainContentFrame.Navigate(typeof(BaseTaskView));
+        }
+
+        private void MainNavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs e)
+        {
+            // MainContentFrame.Navigate(typeof(BaseTaskView));
+        }
+
+
     }
 }

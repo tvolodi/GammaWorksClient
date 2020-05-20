@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GammaWorksClient.iOS", "Gam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GammaWorksClient.UWP", "GammaWorksClient\GammaWorksClient.UWP\GammaWorksClient.UWP.csproj", "{B569E40D-6ABA-4E60-BD1F-E531A72D855E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GammaWorksClient.Wasm", "GammaWorksClient\GammaWorksClient.Wasm\GammaWorksClient.Wasm.csproj", "{3E2F8638-0862-424E-BEC2-7D6C2D9B817C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GammaWorksClient.Wasm", "GammaWorksClient\GammaWorksClient.Wasm\GammaWorksClient.Wasm.csproj", "{3E2F8638-0862-424E-BEC2-7D6C2D9B817C}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

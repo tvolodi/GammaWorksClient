@@ -1,4 +1,5 @@
 ﻿using GammaWorksClient.Shared.Model;
+using GammaWorksClient.Shared.UiTool;
 using Realms;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,15 @@ using System.Text;
 
 namespace GammaWorksClient.Shared.ViewModel
 {
-    public class BaseTaskVM
+    public class BaseTaskViewModel
     {
         Realm realmInstance;
 
-        public BaseTaskVM()
+        // private RelayCommand openNewBaseTaskViewCommand;
+
+        public BaseTaskViewModel()
         {
             realmInstance = Realm.GetInstance();
         }
-
     }
 }
