@@ -18,12 +18,22 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\DateFormatConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataAccessServices\StatusService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\StatusEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Model\BaseTask.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mappers\BaseTaskMapper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\BaseTaskEntity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\StatusModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\BaseTaskModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UiTool\FrameNavigationExtentions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UiTool\RelayCommand.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\BaseTaskVM.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\BaseTaskViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\BaseTaskListPage.xaml.cs">
+      <DependentUpon>BaseTaskListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\BaseTaskView.xaml.cs">
       <DependentUpon>$fileinputname$.xaml</DependentUpon>
     </Compile>
@@ -34,6 +44,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Styles\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\BaseTaskListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

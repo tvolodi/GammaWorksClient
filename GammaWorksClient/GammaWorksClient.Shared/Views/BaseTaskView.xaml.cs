@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GammaWorksClient.Shared.Model;
+using GammaWorksClient.Shared.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +24,44 @@ namespace GammaWorksClient.Shared.Views
     /// </summary>
     public sealed partial class BaseTaskView : Page
     {
+        private BaseTaskModel baseTask;
+
+        private TimePicker timePicker;
+
         public BaseTaskView()
         {
             this.InitializeComponent();
+
+            timePicker = new TimePicker();
+            
+
+
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            BaseTaskViewModel.SaveBaseTaskDB(baseTask);
+
+            Frame parent = this.Parent as Frame;
+            if (parent.CanGoBack) parent.GoBack();
+
+            
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            baseTask = e.Parameter as BaseTaskModel;
+            if(baseTask == null)
+            {
+                baseTask = new BaseTaskModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    PlannedStart = DateTimeOffset.Now,
+                    PlannedFinish = DateTimeOffset.Now
+                };                
+            }
+            this.DataContext = baseTask;
+            
         }
     }
 }

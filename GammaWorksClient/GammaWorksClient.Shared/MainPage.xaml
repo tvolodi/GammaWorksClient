@@ -4,22 +4,28 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:GammaWorksClient"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:local1="using:GammaWorksClient.Shared.Converters" 
     mc:Ignorable="d"
+    Loaded="Page_Loaded"
     >
+
+    <Page.Resources>
+        <local1:DateFormatConverter x:Key="DateFormatConverterKey" />
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-
+        
         <NavigationView x:Name="MainNavigationView" 
-                        PaneDisplayMode="Auto" 
+                        PaneDisplayMode="LeftMinimal" 
                         Grid.Row="0"
-                        Grid.Column="0"
-                        Loaded="MainNavView_LoadedHandler"
-                        SelectionChanged="MainNavView_SelectionChanged"
+                        IsBackEnabled="True"
+                        BackRequested="MainNavView_BackRequested"
+                        PaneTitle="PaneTitle"                        
                         >
             <NavigationView.MenuItems>
                 <NavigationViewItem x:Name="DashboardMI" Content="Dashboard">
@@ -29,27 +35,19 @@
                 </NavigationViewItem>
                 <NavigationViewItem x:Name="WorkTaskMI" Content="Work Tasks" Icon="AllApps"/>
             </NavigationView.MenuItems>
-            <NavigationView.Header>
-                <TextBlock Text="Header" />
-            </NavigationView.Header>
-            <Frame x:Name="MainContentFrame">
+            
+            <Frame x:Name="MainNavigationFrame">
                 <Frame.ContentTransitions>
                     <TransitionCollection />
                 </Frame.ContentTransitions>
-
-                <StackPanel Orientation="Horizontal">
-                    <Frame x:Name="MainFrame">
-                        <TextBlock Text="MainFrame" />
-                    </Frame>
-                    <Frame x:Name="DetailsFrame">
-                        <TextBlock Text="Details" />
-                    </Frame>
-                </StackPanel>
-
+                
             </Frame>
 
         </NavigationView>
-
+        
+        <Border BorderBrush="DarkBlue" BorderThickness="3" Width="20" Height="20" Grid.Row="1">
+            <TextBlock Text="Border" />
+        </Border>
 
     </Grid>
 </Page>

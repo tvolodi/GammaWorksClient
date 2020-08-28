@@ -1,5 +1,6 @@
 ﻿using GammaWorksClient.Shared.Model;
 using GammaWorksClient.Shared.UiTool;
+using GammaWorksClient.Shared.ViewModel;
 using GammaWorksClient.Shared.Views;
 using Realms;
 using System;
@@ -8,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -27,68 +29,11 @@ namespace GammaWorksClient
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private ObservableCollection<BaseTask> BaseTaskObsList { get; set; }       
 
         public MainPage()
         {
             this.InitializeComponent();
 
-            BaseTaskObsList = new ObservableCollection<BaseTask>();
-            BaseTask testBaseTask = new BaseTask
-            {
-                Descr = "Test task 1"                
-            };
-            BaseTaskObsList.Add(testBaseTask);
-            testBaseTask = new BaseTask
-            {
-                Descr = "Test task 2"
-            };
-            BaseTaskObsList.Add(testBaseTask);
-
-#if NETFX_CORE || __ANDROID__ || __IOS__ || __MACOS__
-
-            var realm = Realm.GetInstance();
-
-            realm.Write(() =>
-            {
-                realm.Add(testBaseTask);
-            });
-
-            var baseTasksCounter = realm.All<BaseTask>();
-
-            int counter = baseTasksCounter.Count();
-
-            realm.Write(() =>
-            {
-                realm.Add(new BaseTask { Descr = "Test task 3"});
-            });
-
-            int counter2 = baseTasksCounter.Count();
-
-
-            var taskList = baseTasksCounter.ToList();
-#endif
-            // DataContext = BaseTaskObsList;
-        }
-
-        private void AddNewBaseTask(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void EditBaseTask(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void DeleteBaseTask(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void MainNavView_LoadedHandler(object sender, RoutedEventArgs e)
-        {
-            // MainContentFrame.Navigate(typeof(BaseTaskView));
         }
 
         private void MainNavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs e)
@@ -96,6 +41,41 @@ namespace GammaWorksClient
             // MainContentFrame.Navigate(typeof(BaseTaskView));
         }
 
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            BaseTaskListPage baseTaskListPage = MainNavigationFrame.Navigate<BaseTaskListPage>();
+        }
 
+        private void BaseTaskItemClickHndl(object sender, ItemClickEventArgs e)
+        {
+            BaseTaskModel baseTask = (BaseTaskModel)e.ClickedItem;
+
+            MainNavigationFrame.Navigate(typeof(BaseTaskView));
+        }
+
+        private void MainNavView_BackRequested(object sender, NavigationViewBackRequestedEventArgs e)
+        {
+            OnBackRequested();
+            var evArg = e;
+        }
+
+        private bool OnBackRequested()
+        {
+
+            if (MainNavigationFrame.CanGoBack)
+            {
+                MainNavigationFrame.GoBack();
+                return true;
+            }
+            else return false;
+
+            DateTimeOffset dateTimeOffset = DateTimeOffset.Now;
+            // dateTimeOffset.
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            
+        }
     }
 }

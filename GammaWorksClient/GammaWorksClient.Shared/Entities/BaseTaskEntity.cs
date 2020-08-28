@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GammaWorksClient.Shared.Model
 {
-    public class BaseTask : RealmObject
+    public class BaseTaskEntity: RealmObject
     {
         [PrimaryKey]
         public string Id { get; set; } = Guid.NewGuid().ToString(); // Unique object id
@@ -14,10 +14,12 @@ namespace GammaWorksClient.Shared.Model
 
         public string Descr { get; set; } = "";
 
-        public DateTimeOffset PlannedStart { get; set; } = DateTimeOffset.MinValue;
-        public DateTimeOffset PlannedFinish { get; set; } = DateTimeOffset.MinValue;
-        public DateTimeOffset ActualStart { get; set; } = DateTimeOffset.MinValue;
-        public DateTimeOffset ActualFinish { get; set; } = DateTimeOffset.MinValue;
+        public long PlannedStart { get; set; } = DateTimeOffset.Now.Ticks;
+        public long PlannedFinish { get; set; } = DateTimeOffset.Now.Ticks;
+        public long ActualStart { get; set; } = 0;
+        public long ActualFinish { get; set; } = 0;
+
+        public string Status { get; set; } = "New";
 
         public int Priority { get; set; } = 5;
 

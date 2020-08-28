@@ -6,36 +6,61 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    
+    >
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20" />
-            <RowDefinition Height="20*" />
-            <RowDefinition Height="20" />
-        </Grid.RowDefinitions>
-
-        <CommandBar x:Name="BaseTaskCommandBar" 
-                    Grid.Row="0" 
-                    AllowDrop="True">
-            <CommandBar.Content>
-                <TextBlock Text="CommandBar" />
-            </CommandBar.Content>
-        </CommandBar>
+    <StackPanel Orientation="Vertical">
+        <Grid HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Task List" 
+                       Foreground="RoyalBlue" 
+                       FontSize="18"
+                       Grid.Column="0"
+                       Margin="30.0,0.0,0.0,0.0"
+                       VerticalAlignment="Bottom"
+                       />
+            <StackPanel Orientation="Horizontal"  
+                        HorizontalAlignment="Right"
+                        Grid.Column="1"
+                        >
+                <AppBarButton Icon="Save" Label="Save" Click="SaveButton_Click"/>
+                <AppBarButton Icon="Cancel" Label="Cancel" />
+            </StackPanel>
+        </Grid>
 
         <StackPanel Orientation="Vertical" Grid.Row="1">
-            <TextBox x:Name="DescriptionTB" Header="Description" Text="" PlaceholderText="Short task description" Margin="10,5,10,10"/>
-            <TextBox x:Name="PlannedStartTB" Header="Planned start:" PlaceholderText="Start date and time" Margin="10,5,10,10"/>
-            <TextBox x:Name="PlannedFinishTB" Header="Planned finish:" PlaceholderText="Finish date and time" Margin="10,5,10,10"/>
-            <TextBox x:Name="ActualStartTB" Header="Actual start" PlaceholderText="Actual date and time" Margin="10,5,10,10"/>
-            <TextBox x:Name="ActualFinishTB" Header="Actual finish" PlaceholderText="Finish date and time" Margin="10,5,10,10"/>
+            <TextBox x:Name="DescriptionTB" 
+                     Header="Description" 
+                     Text="{Binding Descr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                     PlaceholderText="Short task description" 
+                     Margin="10,5,10,10"/>
+            <StackPanel Orientation="Horizontal">
+                <DatePicker Header="Planned start date" Date="{Binding PlannedStart}"/>
+                <TimePicker ClockIdentifier="24HourClock"  Header="Planned start time" Time="{Binding PlannedStart.TimeOfDay}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <DatePicker Header="Planned finish date" Date="{Binding PlannedFinish}"/>
+                <TimePicker ClockIdentifier="24HourClock"  Header="Planned start time" Time="{Binding PlannedFinish.TimeOfDay}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <DatePicker Header="Actual start date" Date="{Binding ActualStart}"/>
+                <TimePicker ClockIdentifier="24HourClock"  Header="Actual start time" Time="{Binding ActualStart.TimeOfDay}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <DatePicker Header="Actual finish date" Date="{Binding ActualFinish}"/>
+                <TimePicker ClockIdentifier="24HourClock"  Header="Actual finish time" Time="{Binding ActualFinish.TimeOfDay}"/>
+            </StackPanel>
 
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="2">
-            <TextBlock Text="Status: " />
+            <TextBox Header="Status" Text="{Binding Status}" />
         </StackPanel>
-
-
-    </Grid>
+        
+    </StackPanel>
+    
 </Page>

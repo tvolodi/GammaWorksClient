@@ -1,0 +1,97 @@
+﻿<Page
+    x:Class="GammaWorksClient.Shared.Views.BaseTaskListPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GammaWorksClient.Shared.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local1="using:GammaWorksClient.Shared.Converters" 
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded"
+    >
+
+    <Page.Resources>
+        <local1:DateFormatConverter x:Key="DateFormatConverterKey" />
+    </Page.Resources>
+
+    <StackPanel Orientation="Vertical" >
+        <Grid HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Task List" 
+                       Foreground="RoyalBlue" 
+                       FontSize="18"
+                       Grid.Column="0"
+                       Margin="30.0,0.0,0.0,0.0"
+                       VerticalAlignment="Bottom"
+                       />
+            <StackPanel Orientation="Horizontal"  
+                        HorizontalAlignment="Right"
+                        Grid.Column="1"
+                        >
+                <AppBarButton x:Name="AddBarButton" 
+                              Icon="Add" 
+                              Label="Add"
+                              Click="AddButton_Click" 
+                              />
+                <AppBarButton x:Name="EditBarButton" 
+                              Icon="Edit" 
+                              Label="Edit" 
+                              Click="EditButton_Click" 
+                              Visibility="Collapsed"
+                              />
+                <AppBarButton x:Name="DeleteBarButton" 
+                              Icon="Delete" 
+                              Label="Delete" 
+                              Click="DeleteButton_Click" 
+                              Visibility="Collapsed"
+                              />
+            </StackPanel>
+        </Grid>
+              
+        <ListView x:Name="BaseTaskListView"
+                  IsItemClickEnabled="True"
+                  IsDoubleTapEnabled="True"
+                  SelectionMode="Multiple"
+                  IsMultiSelectCheckBoxEnabled="True"
+                  IsTapEnabled="True"
+                  IsHoldingEnabled="True"                          
+                  ItemClick="BaseTaskItemClickHndl"
+                  DoubleTapped="ItemDblTapHndl"
+                  Tapped="ItemTapHndl"
+                  Holding="OnHoldingHndl"
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="0,0,0,1"
+                                BorderBrush="LightGray"
+                                >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{Binding Descr}"/>
+
+                            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                                <TextBlock Text="{Binding PlannedStart, Converter={StaticResource DateFormatConverterKey}}" Margin="30,0,0,0"/>
+                                <TextBlock Text="{Binding PlannedFinish, Converter={StaticResource DateFormatConverterKey}}" Margin="30,0,0,0"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                                <TextBlock Text="{Binding ActualStart, Converter={StaticResource DateFormatConverterKey}}" Margin="30,0,0,0"/>
+                                <TextBlock Text="{Binding ActualFinish, Converter={StaticResource DateFormatConverterKey}}" Margin="30,0,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackPanel>
+
+
+
+</Page>
